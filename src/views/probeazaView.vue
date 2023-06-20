@@ -19,7 +19,7 @@
              v-for="(imagine, index) in product"
              :key="imagine"
              :src="require(`../assets/${imagine.imageW}`)"
-             @click="showProduct(index)"
+             @click="show_product(index)"
              :class="{ selected_image_margin: selected_product_index === index }">
         //adaugam o clasa selected_image_margin care se aplica cand conditia este adevarata.
         <br>
@@ -39,7 +39,7 @@
            v-for="(imagine, index) in logo"
            :key="imagine"
            :src="require(`../assets/${imagine.image}`)"
-           @click="showLogo(index)"
+           @click="show_logo(index)"
            :class="{ selected_image_margin: selected_logo_index === index }">
       <button @click="nextImage">
         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
@@ -137,15 +137,20 @@ export default {
         this.selected_product_image = this.product[this.selected_product_index].imageW;
       }
     },
-    showProduct(index) {
+    //s
+    show_product(index) {
       this.selected_product_index = index
+      //actualizeaza indexul ca sa afisieze imaginea curenta
     },
-    showLogo(index) {
+    show_logo(index) {
       this.selected_logo_index = index
     },
     previousImage() {
       this.selected_logo_index = (this.selected_logo_index - 1 + this.logo.length) % this.logo.length;
     },
+    //scadem sau adaugam 1 la indexul curent si adaugam lungimea array-ului. apoi folosind modulo, ne asiguram
+    //ca indexul va ajunge la ultimul element sau la primul element din array, daca se afla pe prima pozitie
+    //sau pe ultima pozitie din array.
     nextImage() {
       this.selected_logo_index = (this.selected_logo_index + 1) % this.logo.length;
     },
